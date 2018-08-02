@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Handling Form Submission</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/register.js"></script>
+<link rel="stylesheet" href="register.css">
+</head>
+<body>
+	<div class="form-box">
+    <div class="head">SIGN UP</div> 
+	<form action="#" id="login-form"  name="register">
+		<div class="form-group">
+			<label class="label-control">
+				<span class="label-text">First name</span>
+			</label>
+			<input type="text" name="firstName" id="first-name" class="required"/>
+		</div>
+		<div class="form-group">
+			<label class="label-control">
+				<span class="label-text">Last name</span>
+			</label>
+			<input type="text" name="lastName" id="last-name" class="required"/>
+		</div>
+		<div class="form-group">
+			<label class="label-control">
+				<span class="label-text">Email</span>
+			</label>
+			<input type="email" name="email" id="email" class="required"/>
+		</div>
+		<div class="form-group">
+			<label class="label-control">
+				<span class="label-text">Password</span>
+			</label>
+			<input type="password" name="password" id="pwd1" class="required"/>
+		</div>
+		<div class="form-group">
+			<label class="label-control">
+				<span class="label-text">Repeat Password</span>
+			</label>
+			<input type="password" name="passwordVerify" id="pwd2" class="required"/>
+		</div>
+		<div class="registerBtn">
+			<span><button type="button" class="registerbtn">SIGN UP</button></span>
+		</div>
+		<div class="container signin">
+			<p>
+				By signing up, you agree to our <a href="#">terms and conditions. </a>
+			</p>
+		</div>
+	</form>
+	</div>
+	
+</body>
+</html>
