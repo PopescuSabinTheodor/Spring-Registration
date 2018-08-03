@@ -2,7 +2,10 @@ package com.registration;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Mail model
+ *
+ */
 public class Mail {
 
     private String from;

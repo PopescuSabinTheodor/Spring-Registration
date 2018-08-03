@@ -7,6 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+/**
+ * Interface for generic CRUD operations on a repository for {@link Hash}
+ *
+ */
 public interface HashRepository extends CrudRepository<Hash, Long>  {
 	
 	boolean existsByHashValue(String hashValue);
