@@ -13,9 +13,10 @@ public class Hash  {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	Integer hashId;
-	String hashValue;
-	Long userId;
+	private Integer hashId;
+	private String hashValue;
+	private Long userId;
+	
 	public String getHashValue() {
 		return hashValue;
 	}
@@ -28,7 +29,5 @@ public class Hash  {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	
-	
 	
 }

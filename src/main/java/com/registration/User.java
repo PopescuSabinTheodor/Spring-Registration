@@ -12,13 +12,13 @@ import javax.persistence.Id;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long userId;
-	String firstName;
-	String lastName;
-	String email;
-	String password;
-	String status;
-	String role;
+	private Long userId;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String password;
+	private String status;
+	private String role;
 
 	public String getFirstName() {
 		return firstName;

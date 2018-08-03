@@ -1,12 +1,17 @@
 package com.registration;
 
+/**
+ * User form data model
+ *
+ */
 public class UserForm {
 	
-	String firstName;
-	String lastName;
-	String email;
-	String password;
-	String passwordVerify;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String password;
+	private String passwordVerify;
+	
 	public String getFirstName() {
 		return firstName;
 	}
