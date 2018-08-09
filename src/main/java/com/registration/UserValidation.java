@@ -5,7 +5,11 @@ package com.registration;
  *
  */
 public class UserValidation {
-
+	
+	/**
+	 * Boolean used to check if the email address is already in the database
+	 * Default is false
+	 */
 	private boolean emailExists = false;
 	
 	

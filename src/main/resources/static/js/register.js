@@ -21,6 +21,7 @@ $(document).ready(
 				}
 
 			}
+			$(".registration-successful").hide();
 			function validateEmail(email) {
 				var re = /\S+@\S+\.\S+/;
 				return re.test(email);
@@ -79,8 +80,9 @@ $(document).ready(
 
 			function checkUser(data) {
 				var emailNotValid = data.emailExists;
+				$("#email-exists").hide();
 				if (emailNotValid) {
-					alert("Email already taken")
+					$("#email-exists").text("This email is already in use").show();
 				} else {
 					console.log("serializeee... ", $('form').serialize());
 					$.ajax({
@@ -92,9 +94,13 @@ $(document).ready(
 							console.log("iha", data); // Optional
 						},
 						success : function(data) {
-							alert("A verification email has been sent at", JSON
-									.stringify(data));
-							console.log(data);
+							console.log("log....... ", data);
+							$(".form-group").hide();
+							$(".head").html('Welcome');
+							$(".registerBtn").hide();
+							$(".containerSignin").hide();
+							$(".registration-successful").show();
+							$("#registration-email").text("A verification email has been sent to " + data + ".").show();
 						}
 
 					});

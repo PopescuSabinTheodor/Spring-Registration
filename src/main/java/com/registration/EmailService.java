@@ -22,15 +22,21 @@ import freemarker.template.TemplateException;
 @Service
 public class EmailService {
 
+	/**
+	 * Bean used for sending email
+	 */
 	@Autowired
 	private JavaMailSender emailSender;
-
+	/**
+	 * Configuration bean
+	 */
 	@Autowired
 	private Configuration freemarkerConfig;
 	
 	/**
 	 * Builds up and sends an email using Freemarker template.
-	 * @param mail
+	 * @param mail 	The mail object to be sent
+	 * 
 	 * @throws MessagingException
 	 * @throws IOException
 	 * @throws TemplateException

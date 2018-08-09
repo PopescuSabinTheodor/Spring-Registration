@@ -14,26 +14,49 @@
             font-family: 'Roboto', sans-serif;
             font-size: 48px;
         }
+        
+        .verifyBtn {
+ 			background: #6498fe;
+  			border-radius: 2px;
+  			color: #fff;
+  			cursor: pointer;
+  			font-weight: bold;
+  			margin: 5px 0;
+  			text-decoration: none;
+  			padding: 8px;
+  			transition: all 0.15s ease-in-out 0s;
+  			box-shadow: 0 1px 2px 0px rgba(0,0,0,0.16), 0 1px 2px 0px rgba(0,0,0,0.23);
+		}
+		#signature > a {
+			color: white;
+		}
+		.hello {
+			padding-bottom: 0.5em;
+		}
+		.button {
+			display: flex;
+			justify-content: center;
+		}
     </style>
 </head>
 <body style="margin: 0; padding: 0;">
 
     <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
         <tr>
-            <td align="center" bgcolor="#78ab46" style="padding: 40px 0 30px 0;">
+            <td align="center" bgcolor="#6498fe" style="padding: 40px 0 30px 0;">
             </td>
         </tr>
         <tr>
-            <td bgcolor="#eaeaea" style="padding: 40px 30px 40px 30px;">
-                <p>Dear ${name},</p>
-                <p><a href="http://localhost:8082/verification/${hash}/">Click here to verify your account</a></b></p>
-                <p>Thanks</p>
+            <td bgcolor="#f4f4f4" style="padding: 40px 30px 40px 30px;">
+                <p class="hello">Hello ${name},</p>
+                <p>In order to activate your account, click on the button below. </p>
+                <div class="button"><a href="http://localhost:8082/verification/${hash}/" class="verifyBtn">Verify</a></div>
+                <p>If you are having problems verifying your email, please contact us at mailoficial@domeniu.ro </p>
             </td>
         </tr>
         <tr>
-            <td bgcolor="#777777" style="padding: 30px 30px 30px 30px;">
-                <p>${signature}</p>
-                <p>${location}</p>
+            <td bgcolor="#6498fe" style="padding: 30px 30px 30px 30px;">
+                <p id="signature">${signature}</p>
             </td>
         </tr>
     </table>

@@ -11,13 +11,8 @@ import org.springframework.data.repository.query.Param;
  * Interface for generic CRUD operations on a repository for {@link Hash}
  *
  */
-public interface HashRepository extends CrudRepository<Hash, Long>  {
+public interface HashRepository extends CrudRepository<Hash, String>  {
 	
-	boolean existsByHashValue(String hashValue);
 	
-	void deleteByHashValue(String hashValue);
 	
-	@Modifying
-	@Query("Select userId FROM hash WHERE hashValue = :hashValue")
-	List<Long> findByHashValue(@Param("hashValue") String hashValue);
 }

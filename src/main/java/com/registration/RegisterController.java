@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import freemarker.template.TemplateException;
 
@@ -25,13 +26,22 @@ import freemarker.template.TemplateException;
  */
 @RestController
 public class RegisterController {
-
+	
+	/**
+	 * Bean used for working with our user container
+	 */
 	@Autowired
 	private UserRepository userRepository;
-
+	
+	/**
+	 * Bean used for working with our hash container
+	 */
 	@Autowired
 	private HashRepository hashRepository;
-
+	
+	/**
+	 * Bean used for sending emails
+	 */
 	@Autowired
 	private EmailService emailService;
 
@@ -77,9 +87,7 @@ public class RegisterController {
 			saveUser.setRole("ROLE_USER");
 			userRepository.save(saveUser);
 
-			Hash hash = new Hash();
-			hash.setHashValue(String.valueOf(saveUser.hashCode()));
-			hash.setUserId(saveUser.getUserId());
+			Hash hash = new Hash(saveUser.getUserId());
 
 			hashRepository.save(hash);
 			// Constructs the account verification email
@@ -88,12 +96,10 @@ public class RegisterController {
 			mail.setTo(userForm.getEmail());
 			mail.setSubject("Account Verification");
 
-			Map model = new HashMap();
-			model.put("name", userForm.getFirstName() + userForm.getLastName());
-			model.put("location", "Unknown location");
+			Map<String, String> model = new HashMap<String, String>();
+			model.put("name", userForm.getFirstName() + " " + userForm.getLastName());
 			model.put("signature", "https://www.sync.ro");
-			model.put("hash", hash.getHashValue());
-			model.put("id", saveUser.getUserId());
+			model.put("hash", hash.getHashKey());
 			mail.setModel(model);
 			// Sends the email
 			try {
@@ -116,28 +122,28 @@ public class RegisterController {
 	 */
 	@Transactional
 	@RequestMapping(value = "/verification/{hash}", method = RequestMethod.GET)
-	public boolean emailVerification(@PathVariable(value = "hash") String hashValue) {
-		// Checks if the hash is in the database
-		if (hashRepository.existsByHashValue(hashValue)) {
-			// Stores in userId the hash's corresponding user's ID.
-			List<Long> userId = hashRepository.findByHashValue(hashValue);
-			// Handles the case in which there's no user ID corresponding to the hash
-			if (userId.isEmpty()) {
-				return false;
-			} else {
-				// Selects the user based on its ID 
-				// inserts it into the database and deletes its hash
-				Optional<User> x = userRepository.findById(userId.get(0));
-				User user = x.get();
-				if (user != null) {
-					hashRepository.deleteByHashValue(hashValue);
-					user.setStatus("Approved");
-					userRepository.save(user);
-				}
+	public RedirectView emailVerification(@PathVariable(value = "hash") String hashKey) {
+		RedirectView redirectView = new RedirectView();
+		// Stores in userId the hash's corresponding user's ID.
+		Optional<Hash> hashOpt = hashRepository.findById(hashKey);
+		Hash hash = hashOpt.get();
+		// Handles the case in which there's no user ID corresponding to the hash
+		if (hash != null) {
+			// Selects the user based on its ID 
+			// inserts it into the database and deletes its hash
+			Optional<User> x = userRepository.findById(hash.getUserId());
+			User user = x.get();
+			if (user != null) {
+				hashRepository.delete(hash);
+				user.setStatus("Approved");
+				userRepository.save(user);
 			}
-			return true;
+			
+		    redirectView.setUrl("http://localhost:8082/login?activated");
+		    return redirectView;
 		} else {
-			return false;
+			redirectView.setUrl("www.yahoo.com");
+			return redirectView;
 		}
 	}
 

@@ -6,12 +6,15 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/js/register.js"></script>
-<link rel="stylesheet" href="register.css">
+<link rel="stylesheet" href="/css/register.css">
 </head>
 <body>
 	<div class="form-box">
     <div class="head">SIGN UP</div> 
 	<form action="#" id="login-form"  name="register">
+		<div id="registration-thanks" class="registration-successful">Thank you for registering!</div>
+		<div id="registration-email" class="registration-successful"></div>
+		<div id="registration-instructions" class="registration-successful">Please follow the instructions to activate your account</div>
 		<div class="form-group">
 			<label class="label-control">
 				<span class="label-text">First name</span>
@@ -47,16 +50,18 @@
 			<input type="password" name="passwordVerify" id="pwd2" class="required"/>
 		</div>
 		<div id="error-passwordVerify" class="error"></div>
+		<div id="email-exists" class="error"></div>
 		<div class="registerBtn">
 			<span><button type="button" class="registerbtn">SIGN UP</button></span>
 		</div>
-		<div class="container signin">
+		<div class="containerSignin">
 			<p>
 				By signing up, you agree to our <a href="#">terms and conditions. </a>
 			</p>
 		</div>
 	</form>
 	</div>
+	
 	
 </body>
 </html>

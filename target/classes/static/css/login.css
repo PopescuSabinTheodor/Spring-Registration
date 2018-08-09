@@ -1,5 +1,5 @@
 
-form#register {
+form#login {
   overflow: hidden;
   position: relative;
   padding: 40px;
@@ -126,7 +126,7 @@ form#login-form {
 }
 
 
-button.registerbtn[type="button"] {
+button.loginbtn[type="button"] {
   background: #6498fe;
   border:none;
   border-radius: 2px;
@@ -144,7 +144,7 @@ button.registerbtn[type="button"] {
   width: 100%;
   box-shadow: 0 1px 2px 0px rgba(0,0,0,0.16), 0 1px 2px 0px rgba(0,0,0,0.23);
 }
-button.registerbtn[type="button"]:hover {
+button.loginbtn[type="button"]:hover {
   background: #4b81eb;
   box-shadow: 0 2px 4px 0px rgba(0,0,0,0.16), 0 2px 4px 0px rgba(0,0,0,0.23);
 }
@@ -170,3 +170,8 @@ button.registerbtn[type="button"]:hover {
 	font-size: 10px;
 }
 
+.activated {
+	color: green;
+	display: flex;
+	justify-content: center;
+}

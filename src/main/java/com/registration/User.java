@@ -10,14 +10,35 @@ import javax.persistence.Id;
  */
 @Entity(name = "users")
 public class User {
+	/**
+	 * User's unique identifier
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
+	/**
+	 * User's first name
+	 */
 	private String firstName;
+	/**
+	 * User's last name
+	 */
 	private String lastName;
+	/**
+	 * User's email address
+	 */
 	private String email;
+	/**
+	 * User's password
+	 */
 	private String password;
+	/**
+	 * User's status  approved/unapproved
+	 */
 	private String status;
+	/**
+	 * User's role
+	 */
 	private String role;
 
 	public String getFirstName() {

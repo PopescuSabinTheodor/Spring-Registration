@@ -9,6 +9,10 @@ import org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean;
  */
 public class FreemarkerConfig {
 
+	/**
+	 * Sets the path from where to load the templates
+	 * @return
+	 */
 	@Bean
 	public FreeMarkerConfigurationFactoryBean getFreeMarkerConfiguration() {
 		FreeMarkerConfigurationFactoryBean bean = new FreeMarkerConfigurationFactoryBean();

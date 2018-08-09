@@ -7,23 +7,28 @@ import java.util.Map;
  *
  */
 public class Mail {
-
+	/**
+	 * From field of the email
+	 */
     private String from;
+    /**
+     * To field of the email
+     */
     private String to;
+    /**
+     * Subject of the email
+     */
     private String subject;
+    /**
+     * Body of the email
+     */
     private String content;
+    /**
+     * A hashmap used to fill the html template with specific values
+     */
     private Map model = new HashMap();
 
-    public Mail() {
-    }
-
-    public Mail(String from, String to, String subject, String content) {
-        this.from = from;
-        this.to = to;
-        this.subject = subject;
-        this.content = content;
-    }
-
+    
     public String getFrom() {
         return from;
     }

@@ -6,10 +6,25 @@ package com.registration;
  */
 public class UserForm {
 	
+	/**
+	 * User's first name field 
+	 */
 	private String firstName;
+	/**
+	 * User's last name field
+	 */
 	private String lastName;
+	/**
+	 * User's email address field
+	 */
 	private String email;
+	/**
+	 * User's password field
+	 */
 	private String password;
+	/**
+	 * User's matching password field
+	 */
 	private String passwordVerify;
 	
 	public String getFirstName() {
