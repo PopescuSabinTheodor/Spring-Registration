@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +39,12 @@ public class RegisterController {
 	 */
 	@Autowired
 	private HashRepository hashRepository;
+	
+	/**
+	 * Bean used for working with our updateKey container
+	 */
+	@Autowired
+	private UpdateKeyRepository updateKeyRepository;
 	
 	/**
 	 * Bean used for sending emails
@@ -78,6 +85,7 @@ public class RegisterController {
 		if (userForm == null) {
 			return "Failed";
 		} else {
+			String template = "email-template.ftl";
 			User saveUser = new User();
 			saveUser.setFirstName(userForm.getFirstName());
 			saveUser.setLastName(userForm.getLastName());
@@ -100,10 +108,11 @@ public class RegisterController {
 			model.put("name", userForm.getFirstName() + " " + userForm.getLastName());
 			model.put("signature", "https://www.sync.ro");
 			model.put("hash", hash.getHashKey());
+			model.put("link", "verification");
 			mail.setModel(model);
 			// Sends the email
 			try {
-				emailService.sendSimpleMessage(mail);
+				emailService.sendSimpleMessage(mail, template);
 			} catch (MessagingException | IOException | TemplateException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -145,6 +154,68 @@ public class RegisterController {
 			redirectView.setUrl("www.yahoo.com");
 			return redirectView;
 		}
+	}
+	/**
+	 * TODO
+	 * @param email
+	 * @return
+	 */
+	@RequestMapping(value = "/recover", method = RequestMethod.POST, consumes = "application/json")
+	@ResponseBody
+	public UserValidation recoverPassword(@RequestBody EmailDTO email) {
+		UserValidation userValidation = new UserValidation();
+		if (userRepository.existsByEmail(email.getEmail())) {
+			String template = "password-recover-email.ftl";
+			userValidation.setEmailExists(true);
+			Optional<User> optional = userRepository.findOneByEmail(email.getEmail());
+			User user = optional.get();
+			
+			UpdateKey updateKey = new UpdateKey(email.getEmail());
+			updateKeyRepository.save(updateKey);
+			
+			Mail mail = new Mail();
+			mail.setFrom("no-reply@sync.ro");
+			mail.setTo(email.getEmail());
+			mail.setSubject("Recover password");
+
+			Map<String, String> model = new HashMap<String, String>();
+			model.put("name", user.getFirstName() + " " + user.getLastName());
+			model.put("signature", "https://www.sync.ro");
+			model.put("key", updateKey.getUpdateKey());
+			model.put("link", "change-password");
+			mail.setModel(model);
+			// Sends the email
+			try {
+				emailService.sendSimpleMessage(mail, template);
+			} catch (MessagingException | IOException | TemplateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return userValidation;
+	}
+	
+	@RequestMapping(value = "/change-password", headers="updateKeyString", method = RequestMethod.GET)
+	public void changePassword(@PathVariable(value = "updateKeyString") String updateKeyString) {
+		
+	}
+	
+	@RequestMapping(value = "/recoverPassword", method = RequestMethod.POST)
+	public PasswordUpdate updatePassword(@RequestBody PasswordForm passwordForm ) {
+		PasswordUpdate passwordUpdate = new PasswordUpdate();
+		Optional<UpdateKey> optional = updateKeyRepository.findById(passwordForm.getUpdateKey());
+		if (optional.isPresent()) {
+			UpdateKey updateKey = optional.get();
+			Optional<User> optionalUser = userRepository.findOneByEmail(updateKey.getEmail());
+			if (optionalUser.isPresent()) {
+				User user = optionalUser.get();
+				user.setPassword(passwordForm.getPassword());
+				userRepository.save(user);
+				updateKeyRepository.delete(updateKey);
+				passwordUpdate.setPasswordUpdated(true);
+			}
+		}
+		return passwordUpdate;
 	}
 
 }

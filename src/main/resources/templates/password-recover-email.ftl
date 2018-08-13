@@ -49,9 +49,9 @@
         <tr>
             <td bgcolor="#f4f4f4" style="padding: 40px 30px 40px 30px;">
                 <p class="hello">Hello ${name},</p>
-                <p>In order to activate your account, click on the button below. </p>
-                <div class="button"><a href="http://localhost:8082/${link}/${hash}/" class="verifyBtn">Verify</a></div>
-                <p>If you are having problems verifying your email, please contact us at mailoficial@domeniu.ro </p>
+                <p>Click the button below to change your password.</p>
+                <div class="button"><a href="http://localhost:8082/${link}?updateKeyString=${key}" class="verifyBtn">Verify</a></div>
+                <p>If you still encounter issues with your account , please contact us at mailoficial@domeniu.ro </p>
             </td>
         </tr>
         <tr>

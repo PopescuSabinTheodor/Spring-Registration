@@ -28,11 +28,6 @@ $(document).ready(
 			}
 
 			function getUserInfo() {
-				var fName = $('#first-name').val();
-				var lName = $('#last-name').val();
-				var email = $('#email').val();
-				var pwd1 = $('#pwd1').val();
-				var pwd2 = $('#pwd2').val();
 				return {
 					"firstName" : $('#first-name').val(),
 					"lastName" : $('#last-name').val(),
@@ -84,14 +79,12 @@ $(document).ready(
 				if (emailNotValid) {
 					$("#email-exists").text("This email is already in use").show();
 				} else {
-					console.log("serializeee... ", $('form').serialize());
 					$.ajax({
 						type : "POST",
 						url : "/registered",
 						contentType : "application/json",
 						data : JSON.stringify(getUserInfo()),
 						error : function(data) {
-							console.log("iha", data); // Optional
 						},
 						success : function(data) {
 							console.log("log....... ", data);

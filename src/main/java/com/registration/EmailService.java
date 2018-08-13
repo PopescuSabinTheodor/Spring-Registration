@@ -41,13 +41,13 @@ public class EmailService {
 	 * @throws IOException
 	 * @throws TemplateException
 	 */
-	public void sendSimpleMessage(Mail mail) throws MessagingException, IOException, TemplateException {
+	public void sendSimpleMessage(Mail mail, String template) throws MessagingException, IOException, TemplateException {
 		MimeMessage message = emailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
 				StandardCharsets.UTF_8.name());
 		
 		//Completes the template's fields using the mail's model.
-		Template t = freemarkerConfig.getTemplate("email-template.ftl");
+		Template t = freemarkerConfig.getTemplate(template);
 		String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, mail.getModel());
 		
 		//Fills the message's fields

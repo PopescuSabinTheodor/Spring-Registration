@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Getting Started: Handling Form Submission</title>
+<title>Login</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
-	<div class="form-box">
+	<div id="loginForm" class="form-box">
     <div class="head">Log In</div> 
 	<form action="#" id="login-form"  name="login">
 		<div class="activated">Account activated!</div>
@@ -30,7 +30,39 @@
 		<div class="loginBtn">
 			<span><button type="button" class="loginbtn">LOGIN</button></span>
 		</div>
+		<div class="containerForgotPassword">
+			<p>
+				<a href="http://localhost:8082/login?recover"> Forgot your password? </a>
+			</p>
+		</div>
 	</form>
 	</div>
+	
+	<div id="recoverForm" class="form-box">
+    	<div class="head">Recover password</div> 
+		<form action="#" id="recover-form" name="login">
+		<div id="recover-email-true" class="recover-email">An email will be sent to the specified address.</div>
+		<div class="recover-email">Follow the instructions there to change your password.</div>
+		<div class="email-not-exist">There is no account using the email address you specified.</div>
+		<div class="activated">Account activated!</div>
+		<div class="form-group">
+			<label class="label-control">
+				<span class="label-text">Email</span>
+			</label>
+			<input type="email" name="email" id="recover-email" class="required"/>
+		</div>
+		<div id="error-email-recover" class="error"></div>
+		<div class="recoverBtn">
+			<span><button type="button" class="recoverbtn">Recover</button></span>
+		</div>
+		<div class="containerForgotPassword">
+			<p>
+				<a href="http://localhost:8082/login"> Go back to login. </a>
+			</p>
+		</div>
+		
+	</form>
+	</div>
+	
 </body>
 </html>

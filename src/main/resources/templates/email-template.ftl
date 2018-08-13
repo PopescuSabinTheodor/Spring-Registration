@@ -50,7 +50,7 @@
             <td bgcolor="#f4f4f4" style="padding: 40px 30px 40px 30px;">
                 <p class="hello">Hello ${name},</p>
                 <p>In order to activate your account, click on the button below. </p>
-                <div class="button"><a href="http://localhost:8082/verification/${hash}/" class="verifyBtn">Verify</a></div>
+                <div class="button"><a href="http://localhost:8082/${link}/${hash}/" class="verifyBtn">Verify</a></div>
                 <p>If you are having problems verifying your email, please contact us at mailoficial@domeniu.ro </p>
             </td>
         </tr>

@@ -1,5 +1,7 @@
 package com.registration;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -15,5 +17,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	 * @return true if it does, false otherwise
 	 */
 	boolean existsByEmail(String email);
+	
+	Optional<User> findOneByEmail(String email);
 	
 }

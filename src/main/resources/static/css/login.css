@@ -5,6 +5,7 @@ form#login {
   padding: 40px;
 }
 
+
 *{
   margin: 0;
   padding: 0;
@@ -22,7 +23,7 @@ body {
   max-width: 500px;
   box-shadow: 0 3px 6px 0px rgba(0,0,0,0.16), 0 3px 6px 0px rgba(0,0,0,0.23);
 }
-form#login-form {
+form#login-form, form#recover-form {
   overflow: hidden;
   position: relative;
   padding: 40px;
@@ -126,7 +127,7 @@ form#login-form {
 }
 
 
-button.loginbtn[type="button"] {
+button.loginbtn[type="button"], button.recoverbtn[type="button"] {
   background: #6498fe;
   border:none;
   border-radius: 2px;
@@ -144,24 +145,24 @@ button.loginbtn[type="button"] {
   width: 100%;
   box-shadow: 0 1px 2px 0px rgba(0,0,0,0.16), 0 1px 2px 0px rgba(0,0,0,0.23);
 }
-button.loginbtn[type="button"]:hover {
+button.loginbtn[type="button"]:hover, button.recoverbtn[type="button"]:hover {
   background: #4b81eb;
   box-shadow: 0 2px 4px 0px rgba(0,0,0,0.16), 0 2px 4px 0px rgba(0,0,0,0.23);
 }
-.text-p{
+.text-p {
   font-size: 14px;
   text-align: center;
   margin: 10px 0;
 }
-.text-p a{
+.text-p a {
   color: #175690;
 }
-@media (max-width: 480px){
+@media (max-width: 480px) {
   .form-box {
     width: 90%;
     margin: 30px auto;
   }
-  form#login-form{
+  form#login-form, form#recover-form {
     padding:8%;
   }
 }
@@ -174,4 +175,10 @@ button.loginbtn[type="button"]:hover {
 	color: green;
 	display: flex;
 	justify-content: center;
+}
+
+.containerForgotPassword {
+	display: flex;
+	flex-direction: row-reverse;
+	margin-top: 1em;
 }
