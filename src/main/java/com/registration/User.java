@@ -40,63 +40,107 @@ public class User {
 	 * User's role
 	 */
 	private String role;
-
+	/**
+	 * Getter
+	 * @return the user's first name
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
-
+	/**
+	 * Setter
+	 * @param firstName the user's first name
+	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
+	/**
+	 * Getter
+	 * @return the user's last name
+	 */
 	public String getLastName() {
 		return lastName;
 	}
-
+	/**
+	 * Setter
+	 * @param lastName the user's last name
+	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
+	/**
+	 * Getter
+	 * @return the user's email address
+	 */
 	public String getEmail() {
 		return email;
 	}
-
+	/**
+	 * Setter
+	 * @param email the user's email address
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	/**
+	 * Getter
+	 * @return the user's password
+	 */
 	public String getPassword() {
 		return password;
 	}
-
+	/**
+	 * Setter
+	 * @param password the user's password
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	/**
+	 * Getter
+	 * @return the user's status
+	 */
 	public String getStatus() {
 		return status;
 	}
-
+	/**
+	 * Setter
+	 * @param status the user's status
+	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
+	/**
+	 * Getter
+	 * @return the user's role
+	 */
 	public String getRole() {
 		return role;
 	}
-
+	/**
+	 * Setter
+	 * @param role the user's role
+	 */
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+	/**
+	 * Getter
+	 * @return the user's id
+	 */
 	public Long getUserId() {
 		return userId;
 	}
-
+	/**
+	 * Setter
+	 * @param the user's id
+	 */
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-
+	/**
+	 * Overridden hashCode method for User object
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -111,52 +155,6 @@ public class User {
 		return result;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (role == null) {
-			if (other.role != null)
-				return false;
-		} else if (!role.equals(other.role))
-			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
-			return false;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
-			return false;
-		return true;
-	}
 	
 	
 

@@ -22,62 +22,80 @@ public class Mail {
     /**
      * Body of the email
      */
-    private String content;
     /**
      * A hashmap used to fill the html template with specific values
      */
-    private Map model = new HashMap();
+    private Map<String, String> model = new HashMap<String, String>();
 
-    
+    /**
+     * Getter
+     * @return string value of from
+     */
     public String getFrom() {
         return from;
     }
-
+    /**
+     * Setter
+     * @param from Who sends the email
+     */
     public void setFrom(String from) {
         this.from = from;
     }
-
+    /**
+     * Getter
+     * @return The address where the email is sent
+     */
     public String getTo() {
         return to;
     }
-
+    /**
+     * Setter
+     * @param to The address where the email is sent
+     */
     public void setTo(String to) {
         this.to = to;
     }
-
+    /**
+     * Getter
+     * @return the subject of the email
+     */
     public String getSubject() {
         return subject;
     }
-
+    /**
+     * Setter
+     * @param subject subject of the email
+     */
     public void setSubject(String subject) {
         this.subject = subject;
     }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
     
     
-
+    
+    /**
+     * Overridden toString method
+     * Returns the object as String
+     */
     @Override
     public String toString() {
         return "Mail{" +
                 "from='" + from + '\'' +
                 ", to='" + to + '\'' +
                 ", subject='" + subject + '\'' +
-                ", content='" + content + '\'' +
                 '}';
     }
-    
-    public void setModel(Map model) {
+    /**
+     * Setter
+     * @param model hashmap fields and values
+     */
+    public void setModel(Map<String, String> model) {
     	this.model = model;
     }
-    
-    public Map getModel() {
+    /**
+     * Getter
+     * @return hashmap fields and values
+     */
+    public Map<String, String> getModel() {
     	return model;
     }
 }

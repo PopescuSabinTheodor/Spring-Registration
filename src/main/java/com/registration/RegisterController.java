@@ -2,14 +2,12 @@ package com.registration;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,10 +51,10 @@ public class RegisterController {
 	private EmailService emailService;
 
 	/**
-	 * Rest endpoint that handles a GET request and checks if the email is already
+	 * Rest endpoint that handles a GET request and checks if the email address is already
 	 * in use
 	 * 
-	 * @param email
+	 * @param email email address
 	 * @return Object of type {@link UserValidation}
 	 */
 	@RequestMapping(value = "/users/{email}", method = RequestMethod.GET)
@@ -75,7 +73,7 @@ public class RegisterController {
 	 * sends an email with a verification link to the user's completed email
 	 * address.
 	 * 
-	 * @param userForm
+	 * @param userForm user data collected using a form
 	 * @return the user's email address.
 	 */
 	@RequestMapping(value = "/registered", method = RequestMethod.POST, consumes = "application/json")
@@ -126,7 +124,7 @@ public class RegisterController {
 	 * in the user's email and checks if there is a record of it in the database. If
 	 * there is, the user is validated.
 	 * 
-	 * @param hashValue
+	 * @param hashValue unique string used to identify the user to be activated
 	 * @return true if the hash is correct, false otherwise.
 	 */
 	@Transactional
@@ -156,15 +154,17 @@ public class RegisterController {
 		}
 	}
 	/**
-	 * TODO
-	 * @param email
-	 * @return
+	 * Rest endpoint that handles a POST request, receives an {@link EmailDTO} which
+	 * contains the email address to where an email with an activation link will be sent.
+	 * @param email email address
+	 * @return a boolean that is true if the user's email address is present in the database
 	 */
 	@RequestMapping(value = "/recover", method = RequestMethod.POST, consumes = "application/json")
 	@ResponseBody
 	public UserValidation recoverPassword(@RequestBody EmailDTO email) {
 		UserValidation userValidation = new UserValidation();
 		if (userRepository.existsByEmail(email.getEmail())) {
+			//Sets the email template 
 			String template = "password-recover-email.ftl";
 			userValidation.setEmailExists(true);
 			Optional<User> optional = userRepository.findOneByEmail(email.getEmail());
@@ -173,11 +173,12 @@ public class RegisterController {
 			UpdateKey updateKey = new UpdateKey(email.getEmail());
 			updateKeyRepository.save(updateKey);
 			
+			//Constructs the email
 			Mail mail = new Mail();
 			mail.setFrom("no-reply@sync.ro");
 			mail.setTo(email.getEmail());
 			mail.setSubject("Recover password");
-
+			
 			Map<String, String> model = new HashMap<String, String>();
 			model.put("name", user.getFirstName() + " " + user.getLastName());
 			model.put("signature", "https://www.sync.ro");
@@ -195,22 +196,27 @@ public class RegisterController {
 		return userValidation;
 	}
 	
-	@RequestMapping(value = "/change-password", headers="updateKeyString", method = RequestMethod.GET)
-	public void changePassword(@PathVariable(value = "updateKeyString") String updateKeyString) {
-		
-	}
-	
+	/**
+	 * Rest endpoint that handles a POST request, receives a {@link PasswordForm} which contains the user's
+	 * new password choice and a unique key used to identify each instance of the recover password feature.
+	 * Based on this, a user is able to change it's password only once using the same key.
+	 * @param passwordForm contains the password choice and the action's instance key identifier.
+	 * @return a boolean that is true if the user's password is successfully updated
+	 */
 	@RequestMapping(value = "/recoverPassword", method = RequestMethod.POST)
 	public PasswordUpdate updatePassword(@RequestBody PasswordForm passwordForm ) {
 		PasswordUpdate passwordUpdate = new PasswordUpdate();
 		Optional<UpdateKey> optional = updateKeyRepository.findById(passwordForm.getUpdateKey());
+		//Selects the user to which the password will be updated, by its email address
 		if (optional.isPresent()) {
 			UpdateKey updateKey = optional.get();
 			Optional<User> optionalUser = userRepository.findOneByEmail(updateKey.getEmail());
+			//Updates the user's password in the database
 			if (optionalUser.isPresent()) {
 				User user = optionalUser.get();
 				user.setPassword(passwordForm.getPassword());
 				userRepository.save(user);
+				//Deletes the key which has been used
 				updateKeyRepository.delete(updateKey);
 				passwordUpdate.setPasswordUpdated(true);
 			}

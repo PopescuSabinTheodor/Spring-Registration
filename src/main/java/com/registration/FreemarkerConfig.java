@@ -11,7 +11,7 @@ public class FreemarkerConfig {
 
 	/**
 	 * Sets the path from where to load the templates
-	 * @return
+	 * @return bean
 	 */
 	@Bean
 	public FreeMarkerConfigurationFactoryBean getFreeMarkerConfiguration() {

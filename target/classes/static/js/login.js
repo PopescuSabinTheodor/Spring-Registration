@@ -17,10 +17,10 @@ $(document).ready(
 						error : function(data) {
 						},
 						success: function(data) {
-							$(".form-group").hide();
-							$(".recoverBtn").hide();
 							if(data.emailExists){
 								$(".recover-email").show();
+								$(".form-group").hide();
+								$(".recoverBtn").hide();
 							}else {
 								$(".email-not-exist").show();
 							}

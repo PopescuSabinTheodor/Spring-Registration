@@ -1,5 +1,6 @@
 $(document).ready(
 		function(){
+			$("#feedback").hide();
 			$('.changebtn').click(submitForm);
 			var url = new URL(window.location.href);
 			var updateKey = url.searchParams.get("updateKeyString");
@@ -34,6 +35,7 @@ $(document).ready(
 								$(".feedback").text("Your password has been successfully changed.").show();
 							}else {
 								$(".feedback").text("Your link may have expired.")
+								$("#feedback").show();
 							}
 						}
 					});

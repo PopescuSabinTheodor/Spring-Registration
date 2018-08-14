@@ -182,3 +182,7 @@ button.loginbtn[type="button"]:hover, button.recoverbtn[type="button"]:hover {
 	flex-direction: row-reverse;
 	margin-top: 1em;
 }
+
+.email-not-exist {
+	margin-bottom : 1em;
+}

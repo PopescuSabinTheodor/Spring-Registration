@@ -12,15 +12,24 @@ public class UserValidation {
 	 */
 	private boolean emailExists = false;
 	
-	
+	/**
+	 * Getter
+	 * @return 
+	 */
 	public boolean isEmailExists() {
 		return emailExists;
 	}
+	/**
+	 * Setter
+	 * @param emailExists
+	 */
 	public void setEmailExists(boolean emailExists) {
 		this.emailExists = emailExists;
 	}
 	
-	
+	/**
+	 * Overridden toString function for {@link UserValidation} object
+	 */
 	@Override
 	public String toString() {
 		return "UserValidation [emailExists=" + emailExists + "]";
