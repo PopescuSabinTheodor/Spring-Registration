@@ -3,7 +3,7 @@ spring:
     default-encoding: UTF-8
     host: smtp.gmail.com
     jndi-name:
-    username: popescusabintheodor@gmail.com
+    username: not_relevant@gmail.com
     password: wagwmwrdidwufylc
     port: 25
     properties:
